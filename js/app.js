@@ -7,6 +7,7 @@ let userGuesses;
 let wrongGuesses;
 let wrongLocGuesses;
 let rightGuesses;
+let currentWord;
 /*------------------------ Cached Element References ------------------------*/
 
 const keysElements = document.querySelectorAll(".keyboard-box");
@@ -23,6 +24,19 @@ const init = () => {
 const onKeyboardClicked = (event) => {
   console.log("er are in onKeyboardClick function " + event.target.innerHTML);
 };
+const render = () => {
+  displayWordTable();
+  updateKeyboard();
+};
+const displayWordTable = () => {};
+const updateKeyboard = () => {};
+const validateWord = () => {
+  return true;
+};
+const submitGuess = () => {
+  validateWord();
+};
+const compareWord = () => {};
 /*----------------------------- Event Listeners -----------------------------*/
 
 keysElements.forEach((element) => {
