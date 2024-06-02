@@ -2,8 +2,8 @@
   text-align: center;
   font-size: 50px;
 }
-.table{
-    margin-bottom: 50px;
+.table {
+  margin-bottom: 50px;
 }
 .row {
   display: flex;
@@ -13,7 +13,6 @@
   text-align: center;
   justify-content: center;
   margin: 10px;
- 
 }
 .box {
   border: 2px solid grey;
@@ -29,7 +28,7 @@
 }
 
 .keyboard-box {
-  background-color: gray;
+  background-color: rgb(241, 236, 236);
   border-radius: 5px;
   padding: 20px;
   /* text-align: center;
@@ -39,4 +38,13 @@
   background-image: url("../icons8-backspace-30.png");
   background-repeat: no-repeat;
   background-position: center;
+}
+.green {
+  background-color: green;
+}
+.yellow {
+  background-color: yellow;
+}
+.gray {
+  background-color: gray;
 }
