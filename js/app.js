@@ -28,7 +28,7 @@ const onKeyboardClicked = (event) => {
   console.log("we are in onKeyboardClick function " + event.target.innerHTML);
 
   if (event.target.innerHTML === "ENTER") {
-    console.log("enter");
+    submitGuess();
   } else if (event.target === backSpaceElement) {
     currentWord = currentWord.substring(0, currentWord.length - 1);
     console.log("backspace", currentWord);
@@ -47,7 +47,7 @@ const render = () => {
 
 const resetWordTable = () => {
   lettersElements.forEach((element) => {
-    element.innerHTML="";
+    element.innerHTML = "";
   });
 };
 const displayWordTable = () => {
@@ -87,7 +87,17 @@ const validateWord = () => {
   return true;
 };
 const submitGuess = () => {
-  validateWord();
+  console.log("submit");
+  // 1.check 5 character
+  if (currentWord.length === 5 && validateWord()) {
+    console.log("it is 5 char");
+    userGuesses.push(currentWord);
+    currentWord = "";
+  }
+  // 2. if it is a word
+  // 3.update add to user guess
+  // 4. update letters
+  render();
 };
 const compareWord = () => {};
 init();
