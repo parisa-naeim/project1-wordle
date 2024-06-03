@@ -61,7 +61,7 @@ const displayWordTable = () => {
         lettersElements[letterIndex].classList.add("green");
       } else if (selectedWord.includes(word[i])) {
         lettersElements[letterIndex].classList.add("yellow");
-      }else{
+      } else {
         lettersElements[letterIndex].classList.add("gray");
       }
 
@@ -81,6 +81,7 @@ const displayWordTable = () => {
     lettersElements[letterIndex++].innerHTML = currentWord[i];
   }
 };
+
 const updateKeyboard = () => {
   keysElements.forEach((element) => {
     if (rightLetters.includes(element.innerHTML)) {
@@ -92,23 +93,34 @@ const updateKeyboard = () => {
     }
   });
 };
+
 const validateWord = () => {
   return true;
 };
+
 const submitGuess = () => {
   console.log("submit");
   // 1.check 5 character
   if (currentWord.length === 5 && validateWord()) {
     console.log("it is 5 char");
     userGuesses.push(currentWord);
+
+    for (let i = 0; i < currentWord.length; i++) {
+      if (currentWord[i] === selectedWord[i]) {
+        rightLetters.push(currentWord[i]);
+      } else if (selectedWord.includes(currentWord[i])) {
+        wrongLocLetters.push(currentWord[i]);
+      } else {
+        wrongLetters.push(currentWord[i]);
+      }
+    }
+    currentWord = "";
+
+    // 2. if it is a word
+    // 3.update add to user guess
+    // 4. update letters
+    render();
   }
-
-  currentWord = "";
-
-  // 2. if it is a word
-  // 3.update add to user guess
-  // 4. update letters
-  render();
 };
 const compareWord = () => {};
 init();
