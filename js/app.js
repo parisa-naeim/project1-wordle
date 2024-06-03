@@ -17,11 +17,11 @@ const backSpaceElement = document.querySelector(".backspace-icon");
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
   selectedWord = "HOUSE";
-  userGuesses = ["MOUSE", "FUNNY"];
-  wrongLetters = ["M"];
-  wrongLocLetters = ["Y"];
-  rightLetters = ["O", "H", "U"];
-  currentWord = "GH";
+  userGuesses = [];
+  wrongLetters = [];
+  wrongLocLetters = [];
+  rightLetters = [];
+  currentWord = "";
   render();
 };
 const onKeyboardClicked = (event) => {
@@ -56,13 +56,22 @@ const displayWordTable = () => {
   userGuesses.forEach((word) => {
     for (let i = 0; i < word.length; i++) {
       lettersElements[letterIndex].innerHTML = word[i];
-      if (rightLetters.includes(word[i])) {
+
+      if (word[i] === selectedWord[i]) {
         lettersElements[letterIndex].classList.add("green");
-      } else if (wrongLocLetters.includes(word[i])) {
+      } else if (selectedWord.includes(word[i])) {
         lettersElements[letterIndex].classList.add("yellow");
-      } else if (wrongLetters.includes(word[i])) {
+      }else{
         lettersElements[letterIndex].classList.add("gray");
       }
+
+      //   if (rightLetters.includes(word[i])) {
+      //     lettersElements[letterIndex].classList.add("green");
+      //   } else if (wrongLocLetters.includes(word[i])) {
+      //     lettersElements[letterIndex].classList.add("yellow");
+      //   } else if (wrongLetters.includes(word[i])) {
+      //     lettersElements[letterIndex].classList.add("gray");
+      //   }
 
       letterIndex++;
     }
@@ -92,8 +101,10 @@ const submitGuess = () => {
   if (currentWord.length === 5 && validateWord()) {
     console.log("it is 5 char");
     userGuesses.push(currentWord);
-    currentWord = "";
   }
+
+  currentWord = "";
+
   // 2. if it is a word
   // 3.update add to user guess
   // 4. update letters
@@ -106,3 +117,6 @@ init();
 keysElements.forEach((element) => {
   element.addEventListener("click", onKeyboardClicked);
 });
+// let wrongLetters;
+// let wrongLocLetters;
+// let rightLetters;
