@@ -4,27 +4,42 @@
 
 let selectedWord;
 let userGuesses;
-let wrongGuesses;
-let wrongLocGuesses;
-let rightGuesses;
-let currentWord;
+let wrongLetters;
+let wrongLocLetters;
+let rightLetters;
+let currentWord = "";
 /*------------------------ Cached Element References ------------------------*/
 
 const keysElements = document.querySelectorAll(".keyboard-box");
 const lettersElements = document.querySelectorAll(".box");
+const backSpaceElement = document.querySelector(
+  ".backspace-icon"
+);
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
   selectedWord = "HOUSE";
   userGuesses = ["MOUSE", "FUNNY"];
-  wrongGuesses = ["M"];
-  wrongLocGuesses = ["Y"];
-  rightGuesses = ["O", "H", "U"];
+  wrongLetters = ["M"];
+  wrongLocLetters = ["Y"];
+  rightLetters = ["O", "H", "U"];
   currentWord = "GH";
   render();
 };
 const onKeyboardClicked = (event) => {
-  console.log("er are in onKeyboardClick function " + event.target.innerHTML);
+    console.log("we are in onKeyboardClick function " + event.target.innerHTML);
+
+  if (event.target.innerHTML === "ENTER") {
+    console.log("enter");
+  } else if (event.target === backSpaceElement) {
+    console.log("backspace");
+  } else {
+    if (currentWord.length < 5) {
+      currentWord = currentWord + event.target.innerHTML;
+    }
+  }
+
+  render();
 };
 const render = () => {
   displayWordTable();
@@ -36,11 +51,11 @@ const displayWordTable = () => {
   userGuesses.forEach((word) => {
     for (let i = 0; i < word.length; i++) {
       lettersElements[letterIndex].innerHTML = word[i];
-      if (rightGuesses.includes(word[i])) {
+      if (rightLetters.includes(word[i])) {
         lettersElements[letterIndex].classList.add("green");
-      } else if (wrongLocGuesses.includes(word[i])) {
+      } else if (wrongLocLetters.includes(word[i])) {
         lettersElements[letterIndex].classList.add("yellow");
-      } else if (wrongGuesses.includes(word[i])) {
+      } else if (wrongLetters.includes(word[i])) {
         lettersElements[letterIndex].classList.add("gray");
       }
 
@@ -54,11 +69,11 @@ const displayWordTable = () => {
 };
 const updateKeyboard = () => {
   keysElements.forEach((element) => {
-    if (rightGuesses.includes(element.innerHTML)) {
+    if (rightLetters.includes(element.innerHTML)) {
       element.classList.add("green");
-    } else if (wrongLocGuesses.includes(element.innerHTML)) {
+    } else if (wrongLocLetters.includes(element.innerHTML)) {
       element.classList.add("yellow");
-    } else if (wrongGuesses.includes(element.innerHTML)) {
+    } else if (wrongLetters.includes(element.innerHTML)) {
       element.classList.add("gray");
     }
   });
