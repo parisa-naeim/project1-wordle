@@ -7,14 +7,12 @@ let userGuesses;
 let wrongLetters;
 let wrongLocLetters;
 let rightLetters;
-let currentWord = "";
+let currentWord;
 /*------------------------ Cached Element References ------------------------*/
 
 const keysElements = document.querySelectorAll(".keyboard-box");
 const lettersElements = document.querySelectorAll(".box");
-const backSpaceElement = document.querySelector(
-  ".backspace-icon"
-);
+const backSpaceElement = document.querySelector(".backspace-icon");
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
@@ -27,12 +25,13 @@ const init = () => {
   render();
 };
 const onKeyboardClicked = (event) => {
-    console.log("we are in onKeyboardClick function " + event.target.innerHTML);
+  console.log("we are in onKeyboardClick function " + event.target.innerHTML);
 
   if (event.target.innerHTML === "ENTER") {
     console.log("enter");
   } else if (event.target === backSpaceElement) {
-    console.log("backspace");
+    currentWord = currentWord.substring(0, currentWord.length - 1);
+    console.log("backspace", currentWord);
   } else {
     if (currentWord.length < 5) {
       currentWord = currentWord + event.target.innerHTML;
@@ -46,7 +45,13 @@ const render = () => {
   updateKeyboard();
 };
 
+const resetWordTable = () => {
+  lettersElements.forEach((element) => {
+    element.innerHTML="";
+  });
+};
 const displayWordTable = () => {
+  resetWordTable();
   let letterIndex = 0;
   userGuesses.forEach((word) => {
     for (let i = 0; i < word.length; i++) {
