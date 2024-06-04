@@ -16,6 +16,14 @@ const backSpaceElement = document.querySelector(".backspace-icon");
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
+  fetch("words.txt")
+    .then((res) => res.text())
+    .then((text) => {
+     const textNumber = Math.floor( Math.random()*5758);
+      console.log(text.split("\n")[textNumber]);
+    })
+    .catch((e) => console.error(e));
+
   selectedWord = "HOUSE";
   userGuesses = [];
   wrongLetters = [];
