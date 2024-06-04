@@ -16,10 +16,15 @@ const backSpaceElement = document.querySelector(".backspace-icon");
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
+  console.log("log init");
   fetch("words.txt")
-    .then((res) => res.text())
+    .then((result) => {
+      console.log("say what is right");
+      return result.text();
+    })
     .then((text) => {
-     const textNumber = Math.floor( Math.random()*5758);
+      console.log("say what is wrong");
+      const textNumber = Math.floor(Math.random() * 5758);
       console.log(text.split("\n")[textNumber]);
     })
     .catch((e) => console.error(e));
