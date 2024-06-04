@@ -25,11 +25,12 @@ const init = () => {
     .then((text) => {
       console.log("say what is wrong");
       const textNumber = Math.floor(Math.random() * 5758);
-      console.log(text.split("\n")[textNumber]);
+      selectedWord= text.split("\n")[textNumber]
+      console.log(selectedWord);
     })
     .catch((e) => console.error(e));
 
-  selectedWord = "HOUSE";
+  
   userGuesses = [];
   wrongLetters = [];
   wrongLocLetters = [];
