@@ -25,10 +25,14 @@ const init = () => {
     .then((text) => {
       console.log("say what is wrong");
       const textNumber = Math.floor(Math.random() * 5758);
-      selectedWord= text.split("\n")[textNumber]
+      selectedWord= text.split("\n")[textNumber].toUpperCase();
       console.log(selectedWord);
     })
-    .catch((e) => console.error(e));
+    .catch((e) => {
+        console.error(e);
+        selectedWord="HOUSE";
+    }
+    );
 
   
   userGuesses = [];
@@ -38,6 +42,7 @@ const init = () => {
   currentWord = "";
   render();
 };
+
 const onKeyboardClicked = (event) => {
   console.log("we are in onKeyboardClick function " + event.target.innerHTML);
 
