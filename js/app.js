@@ -1,13 +1,14 @@
 /*-------------------------------- Constants --------------------------------*/
 
 /*---------------------------- Variables (state) ----------------------------*/
-
+let words;
 let selectedWord;
 let userGuesses;
 let wrongLetters;
 let wrongLocLetters;
 let rightLetters;
 let currentWord;
+
 /*------------------------ Cached Element References ------------------------*/
 
 const keysElements = document.querySelectorAll(".keyboard-box");
@@ -25,16 +26,16 @@ const init = () => {
     .then((text) => {
       console.log("say what is wrong");
       const textNumber = Math.floor(Math.random() * 5758);
-      selectedWord= text.split("\n")[textNumber].toUpperCase();
+      words = text.split("\n");
+      selectedWord = words[textNumber].toUpperCase();
       console.log(selectedWord);
     })
     .catch((e) => {
-        console.error(e);
-        selectedWord="HOUSE";
-    }
-    );
+      console.error(e);
+      words = ["house", "loose", "shape"];
+      selectedWord = "HOUSE";
+    });
 
-  
   userGuesses = [];
   wrongLetters = [];
   wrongLocLetters = [];
@@ -84,14 +85,6 @@ const displayWordTable = () => {
         lettersElements[letterIndex].classList.add("gray");
       }
 
-      //   if (rightLetters.includes(word[i])) {
-      //     lettersElements[letterIndex].classList.add("green");
-      //   } else if (wrongLocLetters.includes(word[i])) {
-      //     lettersElements[letterIndex].classList.add("yellow");
-      //   } else if (wrongLetters.includes(word[i])) {
-      //     lettersElements[letterIndex].classList.add("gray");
-      //   }
-
       letterIndex++;
     }
   });
@@ -103,6 +96,7 @@ const displayWordTable = () => {
 
 const updateKeyboard = () => {
   keysElements.forEach((element) => {
+    element.classList = ["keyboard-box"];
     if (rightLetters.includes(element.innerHTML)) {
       element.classList.add("green");
     } else if (wrongLocLetters.includes(element.innerHTML)) {
@@ -114,7 +108,7 @@ const updateKeyboard = () => {
 };
 
 const validateWord = () => {
-  return true;
+  return words.includes(currentWord.toLowerCase());
 };
 
 const submitGuess = () => {
