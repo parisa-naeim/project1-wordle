@@ -21,6 +21,10 @@ const resetButtonElement = document.querySelector("#reset-button");
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
+  keysElements.forEach((element) => {
+    element.addEventListener("click", onKeyboardClicked);
+  });
+
   fetch("words.txt")
     .then((result) => {
       return result.text();
@@ -113,6 +117,7 @@ const showMessage = () => {
   if (!endGame && !validCurrentWord) {
     messageElement.innerHTML = "Please enter a valid word";
   } else if (endGame && winner) {
+    showConfetti();
     messageElement.innerHTML = "You won";
   } else if (endGame && !winner) {
     messageElement.innerHTML =
@@ -166,13 +171,15 @@ const submitGuess = () => {
   render();
 };
 
-const compareWord = () => {};
+function showConfetti() {
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 },
+  });
+}
 
 /*----------------------------- Event Listeners -----------------------------*/
-
-keysElements.forEach((element) => {
-  element.addEventListener("click", onKeyboardClicked);
-});
 
 resetButtonElement.addEventListener("click", init);
 
