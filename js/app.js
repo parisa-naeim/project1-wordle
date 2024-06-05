@@ -111,7 +111,7 @@ const updateKeyboard = () => {
 
 const showMessage = () => {
   if (!endGame && !validCurrentWord) {
-    messageElement.innerHTML = "Not in word list";
+    messageElement.innerHTML = "Please enter a valid word";
   } else if (endGame && winner) {
     messageElement.innerHTML = "You won";
   } else if (endGame && !winner) {
