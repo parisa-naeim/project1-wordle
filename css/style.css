@@ -19,6 +19,7 @@
   height: 60px;
   text-align: center;
   line-height: 60px;
+  transition: background-color 1s ease-in;
 }
 .row-keyboard {
   display: flex;
