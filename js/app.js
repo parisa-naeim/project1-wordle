@@ -45,13 +45,10 @@ const init = () => {
 };
 
 const onKeyboardClicked = (event) => {
-  console.log("we are in onKeyboardClick function " + event.target.innerHTML);
-
   if (event.target.innerHTML === "ENTER") {
     submitGuess();
   } else if (event.target.innerHTML === "Backspace") {
     currentWord = currentWord.substring(0, currentWord.length - 1);
-    console.log("backspace", currentWord);
   } else {
     if (currentWord.length < 5) {
       currentWord = currentWord + event.target.innerHTML;
@@ -123,10 +120,8 @@ const validateWord = () => {
 };
 
 const submitGuess = () => {
-  console.log("submit");
   // 1.check 5 character
   if (currentWord.length === 5 && validateWord()) {
-    console.log("it is 5 char");
     userGuesses.push(currentWord);
     if (currentWord === selectedWord) {
       endGame = true;
