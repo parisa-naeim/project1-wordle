@@ -78,25 +78,41 @@ const resetWordTable = () => {
 };
 const displayWordTable = () => {
   resetWordTable();
-  let letterIndex = 0;
-  userGuesses.forEach((word) => {
+
+  // iterate on all guesses
+  userGuesses.forEach((word, index) => {
+    let selectedWordCopy = selectedWord;
+    const from = 0 + index * 5;
+
+    // iterate on word letters for showing the letters and making them green if match
     for (let i = 0; i < word.length; i++) {
-      lettersElements[letterIndex].innerHTML = word[i];
-
-      if (word[i] === selectedWord[i]) {
-        lettersElements[letterIndex].classList.add("green");
-      } else if (selectedWord.includes(word[i])) {
-        lettersElements[letterIndex].classList.add("yellow");
-      } else {
-        lettersElements[letterIndex].classList.add("gray");
+      lettersElements[i + from].innerHTML = word[i];
+      if (word[i] === selectedWordCopy[i]) {
+        lettersElements[i + from].classList.add("green");
+        selectedWordCopy =
+          selectedWordCopy.substring(0, i) +
+          "_" +
+          selectedWordCopy.substring(i + 1);
       }
+    }
 
-      letterIndex++;
+    // iterate on word letters to make them yellow or gray
+    for (let i = 0; i < word.length; i++) {
+      if (selectedWordCopy.includes(word[i]) && selectedWordCopy[i] !== "_") {
+        lettersElements[i + from].classList.add("yellow");
+      } else if (
+        !selectedWordCopy.includes(word[i]) &&
+        selectedWordCopy[i] !== "_"
+      ) {
+        lettersElements[i + from].classList.add("gray");
+      }
     }
   });
 
+  // show current word
+  const currentWordIndex = userGuesses.length * 5;
   for (let i = 0; i < currentWord.length; i++) {
-    lettersElements[letterIndex++].innerHTML = currentWord[i];
+    lettersElements[i + currentWordIndex].innerHTML = currentWord[i];
   }
 };
 
