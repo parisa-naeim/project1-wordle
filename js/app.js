@@ -15,7 +15,8 @@ let winner;
 
 const keysElements = document.querySelectorAll(".keyboard-box");
 const lettersElements = document.querySelectorAll(".box");
-const message = document.querySelector(".message");
+const messageElement = document.querySelector(".message");
+const resetButtonElement = document.querySelector("#reset-button");
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
@@ -31,8 +32,6 @@ const init = () => {
     })
     .catch((e) => {
       console.error(e);
-      words = ["house", "loose", "shape"];
-      selectedWord = "HOUSE";
     });
 
   userGuesses = [];
@@ -41,6 +40,7 @@ const init = () => {
   rightLetters = [];
   currentWord = "";
   endGame = false;
+  winner = false;
   render();
 };
 
@@ -70,6 +70,7 @@ const render = () => {
 const resetWordTable = () => {
   lettersElements.forEach((element) => {
     element.innerHTML = "";
+    element.classList = ["box"];
   });
 };
 const displayWordTable = () => {
@@ -111,9 +112,10 @@ const updateKeyboard = () => {
 
 const showMessage = () => {
   if (endGame && winner) {
-    message.innerHTML = "You won";
+    messageElement.innerHTML = "You won";
   } else if (endGame && !winner) {
-    message.innerHTML = "You lost. The correct answer is " + selectedWord;
+    messageElement.innerHTML =
+      "You lost. The correct answer is " + selectedWord;
   }
 };
 const validateWord = () => {
@@ -166,5 +168,7 @@ const compareWord = () => {};
 keysElements.forEach((element) => {
   element.addEventListener("click", onKeyboardClicked);
 });
+
+resetButtonElement.addEventListener("click", init);
 
 init();
