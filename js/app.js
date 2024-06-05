@@ -10,6 +10,7 @@ let rightLetters;
 let currentWord;
 let endGame;
 let winner;
+let validCurrentWord;
 
 /*------------------------ Cached Element References ------------------------*/
 
@@ -41,6 +42,7 @@ const init = () => {
   currentWord = "";
   endGame = false;
   winner = false;
+  validCurrentWord = true;
   render();
 };
 
@@ -108,11 +110,15 @@ const updateKeyboard = () => {
 };
 
 const showMessage = () => {
-  if (endGame && winner) {
+  if (!endGame && !validCurrentWord) {
+    messageElement.innerHTML = "Not in word list";
+  } else if (endGame && winner) {
     messageElement.innerHTML = "You won";
   } else if (endGame && !winner) {
     messageElement.innerHTML =
       "You lost. The correct answer is " + selectedWord;
+  } else {
+    messageElement.innerHTML = "";
   }
 };
 const validateWord = () => {
@@ -120,8 +126,9 @@ const validateWord = () => {
 };
 
 const submitGuess = () => {
-  // 1.check 5 character
+  // 1.check 5 character and is a valid word
   if (currentWord.length === 5 && validateWord()) {
+    validCurrentWord = true;
     userGuesses.push(currentWord);
     if (currentWord === selectedWord) {
       endGame = true;
@@ -152,8 +159,11 @@ const submitGuess = () => {
     // 2. if it is a word
     // 3.update add to user guess
     // 4. update letters
-    render();
+  } else {
+    validCurrentWord = false;
   }
+
+  render();
 };
 
 const compareWord = () => {};
