@@ -8,12 +8,15 @@ let wrongLetters;
 let wrongLocLetters;
 let rightLetters;
 let currentWord;
+let endGame;
+let winner;
 
 /*------------------------ Cached Element References ------------------------*/
 
 const keysElements = document.querySelectorAll(".keyboard-box");
 const lettersElements = document.querySelectorAll(".box");
 const backSpaceElement = document.querySelector(".backspace-icon");
+const message = document.querySelector(".message");
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
@@ -41,6 +44,7 @@ const init = () => {
   wrongLocLetters = [];
   rightLetters = [];
   currentWord = "";
+  endGame = false;
   render();
 };
 
@@ -60,9 +64,11 @@ const onKeyboardClicked = (event) => {
 
   render();
 };
+
 const render = () => {
   displayWordTable();
   updateKeyboard();
+  showMessage();
 };
 
 const resetWordTable = () => {
@@ -107,6 +113,13 @@ const updateKeyboard = () => {
   });
 };
 
+const showMessage = () => {
+  if (endGame && winner) {
+    message.innerHTML = "You won";
+  } else if (endGame && !winner) {
+    message.innerHTML = "You lost. The correct answer is " + selectedWord;
+  }
+};
 const validateWord = () => {
   return words.includes(currentWord.toLowerCase());
 };
@@ -117,6 +130,19 @@ const submitGuess = () => {
   if (currentWord.length === 5 && validateWord()) {
     console.log("it is 5 char");
     userGuesses.push(currentWord);
+    if (currentWord === selectedWord) {
+      endGame = true;
+      keysElements.forEach((element) => {
+        element.removeEventListener("click", onKeyboardClicked);
+        winner = true;
+      });
+    } else if (userGuesses.length === 6) {
+      endGame = true;
+      keysElements.forEach((element) => {
+        element.removeEventListener("click", onKeyboardClicked);
+        winner = false;
+      });
+    }
 
     for (let i = 0; i < currentWord.length; i++) {
       if (currentWord[i] === selectedWord[i]) {
@@ -127,6 +153,7 @@ const submitGuess = () => {
         wrongLetters.push(currentWord[i]);
       }
     }
+
     currentWord = "";
 
     // 2. if it is a word
@@ -135,13 +162,13 @@ const submitGuess = () => {
     render();
   }
 };
+
 const compareWord = () => {};
-init();
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 keysElements.forEach((element) => {
   element.addEventListener("click", onKeyboardClicked);
 });
-// let wrongLetters;
-// let wrongLocLetters;
-// let rightLetters;
+
+init();
