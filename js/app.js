@@ -15,19 +15,15 @@ let winner;
 
 const keysElements = document.querySelectorAll(".keyboard-box");
 const lettersElements = document.querySelectorAll(".box");
-const backSpaceElement = document.querySelector(".backspace-icon");
 const message = document.querySelector(".message");
 
 /*-------------------------------- Functions --------------------------------*/
 const init = () => {
-  console.log("log init");
   fetch("words.txt")
     .then((result) => {
-      console.log("say what is right");
       return result.text();
     })
     .then((text) => {
-      console.log("say what is wrong");
       const textNumber = Math.floor(Math.random() * 5758);
       words = text.split("\n");
       selectedWord = words[textNumber].toUpperCase();
@@ -53,7 +49,7 @@ const onKeyboardClicked = (event) => {
 
   if (event.target.innerHTML === "ENTER") {
     submitGuess();
-  } else if (event.target === backSpaceElement) {
+  } else if (event.target.innerHTML === "Backspace") {
     currentWord = currentWord.substring(0, currentWord.length - 1);
     console.log("backspace", currentWord);
   } else {
