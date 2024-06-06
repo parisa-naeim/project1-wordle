@@ -61,7 +61,7 @@ Screenshot of a lost scenario.
 
 ## Attributaions
 
-A file of 5,757 five letter words is downloaded from [five-letter-words github repo](https://github.com/charlesreid1/five-letter-words/blob/master/sgb-words.txt)
+A file of 488 five letter words is downloaded from [BYJU's](https://byjus.com/english/5-letter-words/)
 
 ## Next Steps
 

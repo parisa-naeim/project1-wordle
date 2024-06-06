@@ -32,9 +32,9 @@ const init = () => {
     })
     .then((text) => {
       // select a random word
-      const textNumber = Math.floor(Math.random() * 5758);
-      words = text.split("\n");
-      selectedWord = words[textNumber].toUpperCase();
+      const textNumber = Math.floor(Math.random() * 488);
+      words = text.split("\n").map(item => item.toUpperCase());
+      selectedWord = words[textNumber];
       console.log(selectedWord);
     })
     .catch((e) => {
@@ -152,7 +152,7 @@ const showMessage = () => {
 
 const validateWord = () => {
   // check 5 character and is a valid word
-  return currentWord.length === 5 && words.includes(currentWord.toLowerCase());
+  return currentWord.length === 5 && words.includes(currentWord);
 };
 
 const submitGuess = () => {
