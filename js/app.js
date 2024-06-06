@@ -137,7 +137,7 @@ const showMessage = () => {
     messageElement.innerHTML = "You won";
   } else if (endGame && !winner) {
     messageElement.innerHTML =
-      "You lost. The correct answer is " + selectedWord;
+      "Game is over. The correct answer is " + selectedWord;
   } else {
     messageElement.innerHTML = "";
   }
