@@ -25,7 +25,7 @@ const init = () => {
     element.addEventListener("click", onKeyboardClicked);
   });
 
-  fetch("data/words.txt")
+  fetch("./data/words.txt")
     .then((result) => {
       return result.text();
     })
