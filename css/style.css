@@ -2,9 +2,6 @@
   text-align: center;
   font-size: 50px;
 }
-.table {
-  margin-bottom: 50px;
-}
 .row {
   display: flex;
   gap: 10px;
@@ -77,6 +74,12 @@
 
 .reset-button:hover {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.2);
+}
+
+.hidden-button {
+  width: 100px;
+  height: 50px;
+  cursor: help;
 }
 
 @media (max-width: 768px) {

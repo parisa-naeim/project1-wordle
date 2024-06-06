@@ -16,6 +16,7 @@ const keysElements = document.querySelectorAll(".keyboard-box");
 const lettersElements = document.querySelectorAll(".box");
 const messageElement = document.querySelector(".message");
 const resetButtonElement = document.querySelector("#reset-button");
+const hiddenButtonElement = document.querySelector("#hidden-button");
 
 /*-------------------------------- Functions --------------------------------*/
 
@@ -33,7 +34,7 @@ const init = () => {
     .then((text) => {
       // select a random word
       const textNumber = Math.floor(Math.random() * 488);
-      words = text.split("\n").map(item => item.toUpperCase());
+      words = text.split("\n").map((item) => item.toUpperCase());
       selectedWord = words[textNumber];
       console.log(selectedWord);
     })
@@ -201,8 +202,17 @@ function showConfetti() {
   });
 }
 
+const winTheGame = () => {
+  const word = selectedWord;
+  init();
+  selectedWord = word;
+  currentWord = selectedWord;
+  submitGuess();
+};
+
 /*----------------------------- Event Listeners -----------------------------*/
 
 resetButtonElement.addEventListener("click", init);
+hiddenButtonElement.addEventListener("click", winTheGame);
 
 init();
