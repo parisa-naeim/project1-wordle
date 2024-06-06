@@ -18,16 +18,20 @@ const messageElement = document.querySelector(".message");
 const resetButtonElement = document.querySelector("#reset-button");
 
 /*-------------------------------- Functions --------------------------------*/
+
 const init = () => {
+  // add eventListener to keyboard
   keysElements.forEach((element) => {
     element.addEventListener("click", onKeyboardClicked);
   });
 
+  // read the words file
   fetch("./data/words.txt")
     .then((result) => {
       return result.text();
     })
     .then((text) => {
+      // select a random word
       const textNumber = Math.floor(Math.random() * 5758);
       words = text.split("\n");
       selectedWord = words[textNumber].toUpperCase();
@@ -37,6 +41,7 @@ const init = () => {
       console.error(e);
     });
 
+  // assign default values to the state variables
   userGuesses = [];
   wrongLetters = [];
   wrongLocLetters = [];
@@ -54,6 +59,7 @@ const onKeyboardClicked = (event) => {
   } else if (event.target.innerHTML === "Backspace") {
     currentWord = currentWord.substring(0, currentWord.length - 1);
   } else {
+    // it is a letter
     if (currentWord.length < 5) {
       currentWord = currentWord + event.target.innerHTML;
     }
@@ -74,6 +80,7 @@ const resetWordTable = () => {
     element.classList = ["box"];
   });
 };
+
 const displayWordTable = () => {
   resetWordTable();
 
@@ -115,6 +122,7 @@ const displayWordTable = () => {
 };
 
 const updateKeyboard = () => {
+  // update keybaord keys colors
   keysElements.forEach((element) => {
     element.classList = ["keyboard-box"];
     if (rightLetters.includes(element.innerHTML)) {
@@ -128,6 +136,7 @@ const updateKeyboard = () => {
 };
 
 const showMessage = () => {
+  // show message to user
   if (!endGame && !validCurrentWord) {
     messageElement.innerHTML = "Please enter a valid word";
   } else if (endGame && winner) {
@@ -140,6 +149,7 @@ const showMessage = () => {
     messageElement.innerHTML = "";
   }
 };
+
 const validateWord = () => {
   // check 5 character and is a valid word
   return currentWord.length === 5 && words.includes(currentWord.toLowerCase());
