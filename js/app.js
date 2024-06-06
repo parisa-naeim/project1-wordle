@@ -1,5 +1,3 @@
-/*-------------------------------- Constants --------------------------------*/
-
 /*---------------------------- Variables (state) ----------------------------*/
 let words;
 let selectedWord;
@@ -143,12 +141,13 @@ const showMessage = () => {
   }
 };
 const validateWord = () => {
-  return words.includes(currentWord.toLowerCase());
+  // check 5 character and is a valid word
+  return currentWord.length === 5 && words.includes(currentWord.toLowerCase());
 };
 
 const submitGuess = () => {
-  // 1.check 5 character and is a valid word
-  if (currentWord.length === 5 && validateWord()) {
+  if (validateWord()) {
+    // if it is a word add to user guess
     validCurrentWord = true;
     userGuesses.push(currentWord);
     if (currentWord === selectedWord) {
@@ -165,6 +164,7 @@ const submitGuess = () => {
       });
     }
 
+    // update guessed letters
     for (let i = 0; i < currentWord.length; i++) {
       if (currentWord[i] === selectedWord[i]) {
         rightLetters.push(currentWord[i]);
@@ -176,10 +176,6 @@ const submitGuess = () => {
     }
 
     currentWord = "";
-
-    // 2. if it is a word
-    // 3.update add to user guess
-    // 4. update letters
   } else {
     validCurrentWord = false;
   }
